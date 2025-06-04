@@ -304,12 +304,12 @@
 <body class="font-sans text-steel-800 bg-gray-50" x-data="{ 
     activeFilter: 'all',
     projects: [
-        { id: 1, category: 'commercial', title: 'Grand City Mall', location: 'Downtown District', year: '2023', image: 'https://images.unsplash.com/photo-1581092448075-alskiemjsms?auto=format&fit=crop&w=600&q=80' },
-        { id: 2, category: 'residential', title: 'Skyline Residential Tower', location: 'Metro Heights', year: '2023', image: 'https://images.unsplash.com/photo-1576091160550-9def90a6e582?auto=format&fit=crop&w=600&q=80' },
-        { id: 3, category: 'industrial', title: 'Eco-Friendly Industrial Park', location: 'Tech Valley', year: '2022', image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=600&q=80' },
-        { id: 4, category: 'residential', title: 'Serene Gardens Villas', location: 'Suburban Hills', year: '2022', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80' },
-        { id: 5, category: 'commercial', title: 'Innovatech Corporate HQ', location: 'Business District', year: '2023', image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80' },
-        { id: 6, category: 'infrastructure', title: 'City Link Expressway', location: 'Metro Network', year: '2021', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80' }
+        { id: 1, category: 'Home', title: 'Brick House', location: 'Kaniyakumari District', year: '2023', image: '/image/project/2.png' },
+        { id: 2, category: 'Home', title: 'Modern House', location: ' Kaniyakumari', year: '2023', image: '/image/project/3.png' },
+        { id: 3, category: 'Home', title: 'Secrets To Affordable Yet Stylish House Construction', location: 'Kerala', year: '2022', image: '/image/project/4.png' },
+        { id: 4, category: 'Home', title: 'Kerala House', location: 'Kerala', year: '2022', image: '/image/project/5.png' },
+        { id: 5, category: 'Home', title: 'Luxary Home', location: 'Kaniyakumari District', year: '2023', image: '/image/project/6.png' },
+        { id: 6, category: 'Home', title: ' Kaniyakumari Simple House', location: 'Nagercoil ', year: '2021', image: '/image/project/7.png' }
     ],
     get filteredProjects() {
         return this.activeFilter === 'all' ? this.projects : this.projects.filter(project => project.category === this.activeFilter);
@@ -487,84 +487,101 @@
         </section>
 
         <!-- Featured Project Spotlight -->
-        <section class="featured-project py-20 md:py-28 relative overflow-hidden">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                    <div class="animate-slide-in-left">
-                        <span class="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-semibold uppercase tracking-wider mb-6">Featured Project</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold font-display text-navy-900 mb-6">Grand City Mall</h2>
-                        <p class="text-lg text-steel-600 leading-relaxed mb-8">A state-of-the-art shopping complex that represents the pinnacle of modern commercial architecture. This landmark project combines innovative design with sustainable building practices, creating a dynamic retail destination that serves the community while setting new standards for commercial construction.</p>
-                        
-                        <div class="grid grid-cols-2 gap-6 mb-8">
-                            <div>
-                                <div class="text-2xl font-bold font-display text-amber-600 mb-1">₹450M</div>
-                                <div class="text-steel-600 text-sm">Project Value</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold font-display text-navy-800 mb-1">18 Months</div>
-                                <div class="text-steel-600 text-sm">Completion Time</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold font-display text-amber-600 mb-1">2.5M sq ft</div>
-                                <div class="text-steel-600 text-sm">Total Area</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold font-display text-navy-800 mb-1">LEED Gold</div>
-                                <div class="text-steel-600 text-sm">Sustainability Rating</div>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-4 mb-8">
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-                                <span class="text-steel-600">Advanced steel and glass facade system</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-                                <span class="text-steel-600">Integrated smart building management systems</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-                                <span class="text-steel-600">Energy-efficient HVAC and lighting solutions</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-                                <span class="text-steel-600">Multi-level parking for 2,000+ vehicles</span>
-                            </div>
-                        </div>
-                        
-                        <a href="#" class="btn-primary text-white font-semibold py-3 px-8 rounded-xl inline-flex items-center group">
-                            View Full Case Study
-                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="animate-slide-in-right">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1581092448075-alskiemjsms?auto=format&fit=crop&w=800&q=80" alt="Grand City Mall - Modern commercial complex" class="rounded-2xl shadow-2xl w-full h-auto object-cover aspect-[4/3]">
-                            <div class="absolute inset-0 rounded-2xl bg-gradient-to-t from-navy-900/20 to-transparent"></div>
-                            
-                            <!-- Floating info cards -->
-                            <div class="absolute top-6 right-6 bg-white rounded-xl shadow-xl p-4 animate-float">
-                                <div class="text-center">
-                                    <div class="text-xl font-bold font-display text-navy-800">2023</div>
-                                    <div class="text-xs text-steel-600 font-medium">Award Winner</div>
-                                </div>
-                            </div>
-                            
-                            <div class="absolute bottom-6 left-6 bg-white rounded-xl shadow-xl p-4 animate-float" style="animation-delay: 1s;">
-                                <div class="text-center">
-                                    <div class="text-xl font-bold font-display text-amber-600">350+</div>
-                                    <div class="text-xs text-steel-600 font-medium">Retail Outlets</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<section class="featured-project py-20 md:py-28 relative overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      
+      <!-- Text Content -->
+      <div class="animate-slide-in-left">
+        <span class="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-semibold uppercase tracking-wider mb-6">
+          Featured Project
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-display text-navy-900 mb-6">
+          Luxaar Kanyakumari Residence
+        </h2>
+        <p class="text-lg text-steel-600 leading-relaxed mb-8">
+          Nestled on the coastline of Kanyakumari, this Luxaar home blends sleek, contemporary architecture with warm ambient lighting. The residence features expansive glass facades for panoramic sea views, an open-plan living layout designed for seamless indoor–outdoor flow, and decorative string lights that underscore Luxaar’s commitment to creating both stylish and sustainable living spaces.
+        </p>
+        
+        <!-- Project Stats -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="text-2xl font-bold font-display text-amber-600 mb-1">₹85M</div>
+            <div class="text-steel-600 text-sm">Project Value</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-display text-navy-800 mb-1">12 Months</div>
+            <div class="text-steel-600 text-sm">Completion Time</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-display text-amber-600 mb-1">4,500 sq ft</div>
+            <div class="text-steel-600 text-sm">Total Area</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold font-display text-navy-800 mb-1">2024</div>
+            <div class="text-steel-600 text-sm">Year Completed</div>
+          </div>
+        </div>
+        
+        <!-- Key Features -->
+        <div class="space-y-4 mb-8">
+          <div class="flex items-center">
+            <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+            <span class="text-steel-600">Panoramic views of the Kanyakumari coastline</span>
+          </div>
+          <div class="flex items-center">
+            <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+            <span class="text-steel-600">Custom steel and glass façade system</span>
+          </div>
+          <div class="flex items-center">
+            <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+            <span class="text-steel-600">Energy-efficient lighting & HVAC tailored for coastal climate</span>
+          </div>
+          <div class="flex items-center">
+            <div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+            <span class="text-steel-600">Landscaped courtyard with native flora</span>
+          </div>
+        </div>
+        
+        <a href="#" class="btn-primary text-white font-semibold py-3 px-8 rounded-xl inline-flex items-center group">
+          View Full Case Study
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Image & Floating Cards -->
+      <div class="animate-slide-in-right">
+        <div class="relative">
+          <img
+            src="image/project/6.png"
+            alt="Luxaar Kanyakumari Residence - Modern home with string lights"
+            class="rounded-2xl shadow-2xl w-full h-auto object-cover aspect-[4/3]"
+          >
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-t from-navy-900/20 to-transparent"></div>
+          
+          <!-- Floating info cards -->
+          <div class="absolute top-6 right-6 bg-white rounded-xl shadow-xl p-4 animate-float">
+            <div class="text-center">
+              <div class="text-xl font-bold font-display text-navy-800">2024</div>
+              <div class="text-xs text-steel-600 font-medium">Completed</div>
             </div>
-        </section>
+          </div>
+          
+          <div class="absolute bottom-6 left-6 bg-white rounded-xl shadow-xl p-4 animate-float" style="animation-delay: 1s;">
+            <div class="text-center">
+              <div class="text-xl font-bold font-display text-amber-600">4 BHK</div>
+              <div class="text-xs text-steel-600 font-medium">Bedrooms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
 
         <!-- Client Testimonials -->
         <section class="py-20 md:py-28 bg-white">
@@ -589,10 +606,10 @@
                         </div>
                         <p class="text-steel-600 leading-relaxed mb-6">"Luxaar delivered our corporate headquarters beyond our expectations. Their attention to detail, timeline adherence, and innovative approach made this a seamless experience. The result is a building that truly represents our company's values."</p>
                         <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=50&h=50&q=80" alt="Michael Chen">
+                            
                             <div>
                                 <div class="font-semibold text-navy-900">Michael Chen</div>
-                                <div class="text-steel-600 text-sm">CEO, Innovatech Solutions</div>
+                                
                             </div>
                         </div>
                     </div>
@@ -610,10 +627,10 @@
                         </div>
                         <p class="text-steel-600 leading-relaxed mb-6">"The residential tower project was handled with exceptional professionalism. From the initial design phase to final handover, Luxaar demonstrated expertise and commitment that resulted in a stunning architectural achievement."</p>
                         <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1494790108755-2616b612b7c1?fit=crop&w=50&h=50&q=80" alt="Sarah Williams">
+                           
                             <div>
                                 <div class="font-semibold text-navy-900">Sarah Williams</div>
-                                <div class="text-steel-600 text-sm">Developer, Metro Heights</div>
+                                
                             </div>
                         </div>
                     </div>
@@ -631,10 +648,10 @@
                         </div>
                         <p class="text-steel-600 leading-relaxed mb-6">"Working with Luxaar on our infrastructure project was remarkable. Their expertise in highway construction and commitment to safety standards ensured a successful project that benefits our entire region."</p>
                         <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=50&h=50&q=80" alt="David Rodriguez">
+                            
                             <div>
                                 <div class="font-semibold text-navy-900">David Rodriguez</div>
-                                <div class="text-steel-600 text-sm">Director, City Planning</div>
+                                
                             </div>
                         </div>
                     </div>
@@ -733,19 +750,19 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <span class="text-sm">123 Construction Way, Cityville</span>
+                            <span class="text-sm">CSI memorial Church , Moolachel, Tamil Nadu</span>
                         </p>
                         <p class="flex items-center">
                             <svg class="w-5 h-5 text-amber-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <span class="text-sm">+1 (234) 567-890</span>
+                            <span class="text-sm">+91 8940227683<br> +91 9487919052</span>
                         </p>
                         <p class="flex items-center">
                             <svg class="w-5 h-5 text-amber-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
-                            <span class="text-sm">info@luxaar.com</span>
+                            <span class="text-sm">luxaarconstruction@gmail.com</span>
                         </p>
                     </div>
                 </div>
