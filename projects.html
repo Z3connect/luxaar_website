@@ -304,12 +304,17 @@
 <body class="font-sans text-steel-800 bg-gray-50" x-data="{ 
     activeFilter: 'all',
     projects: [
-        { id: 1, category: 'Home', title: 'Brick House', location: 'Kaniyakumari District', year: '2023', image: 'image/project/2.png' },
-        { id: 2, category: 'Home', title: 'Modern House', location: ' Kaniyakumari', year: '2023', image: 'image/project/3.png' },
-        { id: 3, category: 'Home', title: 'Secrets To Affordable Yet Stylish House Construction', location: 'Kerala', year: '2022', image: 'image/project/4.png' },
-        { id: 4, category: 'Home', title: 'Kerala House', location: 'Kerala', year: '2022', image: 'image/project/5.png' },
-        { id: 5, category: 'Home', title: 'Luxary Home', location: 'Kaniyakumari District', year: '2023', image: 'image/project/6.png' },
-        { id: 6, category: 'Home', title: ' Kaniyakumari Simple House', location: 'Nagercoil ', year: '2021', image: 'image/project/7.png' }
+        { id: 1, category: 'Home', title: 'Brick House', location: 'Kanniyakumari District', year: '2023', image: '/image/project/2.png' },
+        { id: 2, category: 'Home', title: 'Modern House', location: ' Kanniyakumari', year: '2023', image: '/image/project/3.png' },
+        { id: 3, category: 'Home', title: 'Secrets To Affordable Yet Stylish House Construction', location: 'Kerala', year: '2022', image: '/image/project/4.png' },
+        { id: 4, category: 'Home', title: 'Kerala House', location: 'Kerala', year: '2022', image: '/image/project/5.png' },
+        { id: 5, category: 'Home', title: 'Luxary Home', location: 'Kanniyakumari District', year: '2023', image: '/image/project/6.png' },
+        { id: 6, category: 'Home', title: ' Kanniyakumari Simple House', location: 'Nagercoil ', year: '2021', image: '/image/project/7.png' },
+        { id: 7, category: 'Archiitech', title: 'House ', location: 'Kanniyakumari District', year: '2023', image: '/image/project/architech.png' },
+        { id: 8, category: 'commercial', title: 'Modern Office Building', location: '', year: '2023', image: '/image/project/com1.jpg' },
+        { id: 9, category: 'commercial', title: 'Corporate Headquarters', location: 'Kanniyakumari District', year: '2023', image: '/image/project/residential.png' },
+        { id: 10, category: 'Interior ', title: 'Interior  home', location: 'Kanniyakumari District', year: '2023', image: '/image/project/int.png' },
+        { id: 11, category: 'Infrastructure', title: 'Infrastructure ', location: 'Kanniyakumari District', year: '2023', image: '/image/project/int2.png' }
     ],
     get filteredProjects() {
         return this.activeFilter === 'all' ? this.projects : this.projects.filter(project => project.category === this.activeFilter);
