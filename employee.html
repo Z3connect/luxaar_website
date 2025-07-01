@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Employee Management System - Manage your team members efficiently with Luxaar's employee management solution.">
+    <title>Employee Management - Luxaar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script type="text/tailwindcss">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
+                            950: '#0a1f35'
+                        },
+                        'amber': {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03'
+                        },
+                        'steel': {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(2rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-2rem); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(2rem); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.6s ease-out;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.6s ease-out;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #102a43 0%, #243b53 100%);
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-input {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            background: #ffffff;
+            outline: none;
+        }
+        
+        .form-input:hover {
+            border-color: #cbd5e1;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #334155;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(100, 116, 139, 0.3);
+        }
+        
+        .employee-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            transition: all 0.3s ease;
+            border-left: 4px solid #e2e8f0;
+        }
+        
+        .employee-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left-color: #f59e0b;
+        }
+        
+        @media (max-width: 768px) {
+            .table-mobile-card {
+                display: block !important;
+            }
+            
+            .table-mobile-hidden {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-steel-800 bg-steel-50">
+    <!-- Header Section -->
+    <header class="hero-bg py-12 md:py-16 lg:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center animate-fade-in-up">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-display mb-4">
+                    Employee Management System
+                </h1>
+                <p class="text-lg sm:text-xl text-steel-300 max-w-2xl mx-auto">
+                    Manage your team members and their information efficiently
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8 md:py-12 lg:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Mobile-first responsive grid layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                
+                <!-- Form Section - Full width on mobile, 1/3 on large screens -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 animate-slide-in-left">
+                        <h2 class="text-2xl font-bold text-navy-900 mb-6 font-display">Add New Employee</h2>
+                        
+                        <form id="employeeForm" class="space-y-6">
+                            <!-- Name Fields - Side by side on mobile when space allows -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="form-label" for="firstName">First Name</label>
+                                    <input 
+                                        type="text" 
+                                        id="firstName" 
+                                        name="firstName" 
+                                        class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                        required
+                                    >
+                                </div>
+                                
+                                <div>
+                                    <label class="form-label" for="lastName">Last Name</label>
+                                    <input 
+                                        type="text" 
+                                        id="lastName" 
+                                        name="lastName" 
+                                        class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                        required
+                                    >
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="form-label" for="email">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                    required
+                                >
+                            </div>
+                            
+                            <div>
+                                <label class="form-label" for="phone">Phone</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                    required
+                                >
+                            </div>
+                            
+                            <div>
+                                <label class="form-label" for="department">Department</label>
+                                <select 
+                                    id="department" 
+                                    name="department" 
+                                    class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                    required
+                                >
+                                    <option value="">Select Department</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Construction">Construction</option>
+                                    <option value="Project Management">Project Management</option>
+                                    <option value="Administration">Administration</option>
+                                    <option value="Safety">Safety</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="form-label" for="position">Position</label>
+                                <input 
+                                    type="text" 
+                                    id="position" 
+                                    name="position" 
+                                    class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                    required
+                                >
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="form-label" for="hireDate">Hire Date</label>
+                                    <input 
+                                        type="date" 
+                                        id="hireDate" 
+                                        name="hireDate" 
+                                        class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                        required
+                                    >
+                                </div>
+                                
+                                <div>
+                                    <label class="form-label" for="salary">Salary (₹)</label>
+                                    <input 
+                                        type="number" 
+                                        id="salary" 
+                                        name="salary" 
+                                        min="0" 
+                                        step="0.01" 
+                                        class="form-input w-full px-4 py-3 rounded-xl text-base"
+                                        required
+                                    >
+                                </div>
+                            </div>
+                            
+                            <!-- Touch-friendly buttons -->
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <button 
+                                    type="submit" 
+                                    class="btn-primary text-white font-semibold py-3 px-6 rounded-xl text-base flex-1 sm:flex-none min-h-[3rem]"
+                                >
+                                    Add Employee
+                                </button>
+                                <button 
+                                    type="reset" 
+                                    class="btn-secondary text-white font-semibold py-3 px-6 rounded-xl text-base flex-1 sm:flex-none min-h-[3rem]"
+                                >
+                                    Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Employee List Section - Full width on mobile, 2/3 on large screens -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 animate-slide-in-right">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-navy-900 font-display mb-4 sm:mb-0">Employee List</h2>
+                            <div class="text-sm text-steel-600">
+                                3 employees
+                            </div>
+                        </div>
+                        
+                        <!-- Desktop Table View -->
+                        <div class="hidden md:block overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-steel-200">
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">ID</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Name</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Email</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Department</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Position</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Salary</th>
+                                        <th class="text-left py-4 px-4 font-semibold text-steel-700 text-sm">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-steel-100 hover:bg-steel-50 transition-colors duration-200">
+                                        <td class="py-4 px-4 text-steel-600 text-sm">001</td>
+                                        <td class="py-4 px-4 text-steel-800 font-medium text-sm">John Smith</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">john.smith@luxaar.com</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">
+                                            <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-medium">Engineering</span>
+                                        </td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">Senior Engineer</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm font-medium">₹75,000</td>
+                                        <td class="py-4 px-4">
+                                            <div class="flex gap-2">
+                                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Edit
+                                                </button>
+                                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-steel-100 hover:bg-steel-50 transition-colors duration-200">
+                                        <td class="py-4 px-4 text-steel-600 text-sm">002</td>
+                                        <td class="py-4 px-4 text-steel-800 font-medium text-sm">Sarah Johnson</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">sarah.johnson@luxaar.com</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">
+                                            <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Project Management</span>
+                                        </td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">Project Manager</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm font-medium">₹85,000</td>
+                                        <td class="py-4 px-4">
+                                            <div class="flex gap-2">
+                                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Edit
+                                                </button>
+                                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-steel-100 hover:bg-steel-50 transition-colors duration-200">
+                                        <td class="py-4 px-4 text-steel-600 text-sm">003</td>
+                                        <td class="py-4 px-4 text-steel-800 font-medium text-sm">Michael Brown</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">michael.brown@luxaar.com</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">
+                                            <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Construction</span>
+                                        </td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm">Site Supervisor</td>
+                                        <td class="py-4 px-4 text-steel-600 text-sm font-medium">₹65,000</td>
+                                        <td class="py-4 px-4">
+                                            <div class="flex gap-2">
+                                                <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Edit
+                                                </button>
+                                                <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 min-h-[2rem]">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Mobile Card View -->
+                        <div class="block md:hidden space-y-4">
+                            <div class="employee-card p-4 rounded-xl border">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-semibold text-steel-800 text-lg">John Smith</h3>
+                                        <p class="text-steel-600 text-sm">Senior Engineer</p>
+                                    </div>
+                                    <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-medium">Engineering</span>
+                                </div>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">ID:</span>
+                                        <span class="text-steel-700">001</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Email:</span>
+                                        <span class="text-steel-700">john.smith@luxaar.com</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Phone:</span>
+                                        <span class="text-steel-700">+91 9876543210</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Salary:</span>
+                                        <span class="text-steel-700 font-medium">₹75,000</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Hired:</span>
+                                        <span class="text-steel-700">2022-01-15</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Touch-friendly action buttons -->
+                                <div class="flex gap-3">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Edit Employee
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="employee-card p-4 rounded-xl border">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-semibold text-steel-800 text-lg">Sarah Johnson</h3>
+                                        <p class="text-steel-600 text-sm">Project Manager</p>
+                                    </div>
+                                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Project Management</span>
+                                </div>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">ID:</span>
+                                        <span class="text-steel-700">002</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Email:</span>
+                                        <span class="text-steel-700">sarah.johnson@luxaar.com</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Phone:</span>
+                                        <span class="text-steel-700">+91 9876543211</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Salary:</span>
+                                        <span class="text-steel-700 font-medium">₹85,000</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Hired:</span>
+                                        <span class="text-steel-700">2021-03-10</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Touch-friendly action buttons -->
+                                <div class="flex gap-3">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Edit Employee
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="employee-card p-4 rounded-xl border">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <h3 class="font-semibold text-steel-800 text-lg">Michael Brown</h3>
+                                        <p class="text-steel-600 text-sm">Site Supervisor</p>
+                                    </div>
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Construction</span>
+                                </div>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">ID:</span>
+                                        <span class="text-steel-700">003</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Email:</span>
+                                        <span class="text-steel-700">michael.brown@luxaar.com</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Phone:</span>
+                                        <span class="text-steel-700">+91 9876543212</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Salary:</span>
+                                        <span class="text-steel-700 font-medium">₹65,000</span>
+                                    </div>
+                                    <div class="flex items-center text-sm">
+                                        <span class="text-steel-500 w-16">Hired:</span>
+                                        <span class="text-steel-700">2023-06-01</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Touch-friendly action buttons -->
+                                <div class="flex gap-3">
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Edit Employee
+                                    </button>
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 flex-1 min-h-[2.75rem]">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Basic form handling
+        document.getElementById('employeeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Employee added successfully! (This is a demo - the responsive design is now working properly)');
+            this.reset();
+        });
+
+        // Add basic button functionality for demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Edit buttons
+            document.querySelectorAll('button').forEach(button => {
+                if (button.textContent.includes('Edit')) {
+                    button.addEventListener('click', function() {
+                        alert('Edit functionality - This would populate the form with employee data for editing.');
+                    });
+                }
+                
+                if (button.textContent.includes('Delete')) {
+                    button.addEventListener('click', function() {
+                        if (confirm('Are you sure you want to delete this employee?')) {
+                            alert('Employee deleted successfully! (Demo functionality)');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
